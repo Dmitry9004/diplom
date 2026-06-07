@@ -76,7 +76,7 @@ export const loginUserFx = createEffect(async({login, pass}:{login: string, pass
             login: login,
             pass: pass,
         })
-    });
+    })
 
     return response.json()
 });

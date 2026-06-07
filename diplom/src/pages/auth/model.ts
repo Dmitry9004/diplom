@@ -12,6 +12,8 @@ const $userToken = createStore<TokenUserData | null>(null)
 $userToken.on(setTokenData, (_, val) => val)
 
 export const loginUser = createEvent<{login: string, pass:string}>()
+export const loginUserError = createStore<string>("")
+
 export const register = createEvent<{login: string, pass: string}>()
 
 sample({
@@ -31,6 +33,12 @@ sample({
     clock: [registerUserFx.doneData, loginUserFx.doneData],
     target: setTokenData,
 })
+sample ({
+    clock: loginUserFx.fail,
+    fn: () => "Пользователь не найден",
+    target: loginUserError,
+})
+
 
 const setTokenToCOOKIE = createEffect(async(token: TokenUserData)=> {
     localStorage.setItem("access_token", token.token)

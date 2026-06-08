@@ -13,6 +13,7 @@ $userToken.on(setTokenData, (_, val) => val)
 
 export const loginUser = createEvent<{login: string, pass:string}>()
 export const loginUserError = createStore<string>("")
+export const registerUserError = createStore<string>("")
 
 export const register = createEvent<{login: string, pass: string}>()
 
@@ -36,6 +37,12 @@ sample({
     clock: [registerUserFx.doneData, loginUserFx.doneData],
     target: setTokenData,
 })
+sample({
+    clock: registerUserFx.fail,
+    fn: () => "Такой пользователь уже существует",
+    target: registerUserError,
+})
+
 sample ({
     clock: loginUserFx.fail,
     fn: () => "Пользователь не найден",

@@ -104,17 +104,17 @@ export const updateBrandFx = createEffect(async(brand:Brand) => {
 });
 
 export const getTopWords = createEffect(async(brand:Brand) => {
-    const url = "http://103.112.71.189:8083/words?brand="+brand.name+"&limit=10";
+    const url = "http://127.0.0.1:8083/words?brand="+brand.name+"&limit=10";
     return await authRequest(url).then(res => res.json());
 })
 
 export const getBrands = createEffect(async() => {
-    const url = "http://103.112.71.189:8083/brands";
+    const url = "http://127.0.0.1:8083/brands";
     return await authRequest(url).then(res => res.json());
 })
 
 export const getLastReviews = createEffect(async(brand:Brand) => {
-    const url = "http://103.112.71.189:8083/reviews?brand="+brand.name+"&limit=50";
+    const url = "http://127.0.0.1:8083/reviews?brand="+brand.name+"&limit=50";
     return await authRequest(url).then(res => res.json());
 })
 

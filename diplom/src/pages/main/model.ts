@@ -8,6 +8,7 @@ import {
     updateBrandFx
 } from "./effects.ts";
 import {number} from "framer-motion";
+import {setTokenData} from "../auth/model.ts";
 
 export const uploadPage = createEvent();
 
@@ -38,6 +39,7 @@ sample({
     clock: uploadPage,
     target: [getAverageSentimentsAllFx, getSentimentsAllFx, getBrands],
 })
+
 
 export const setFromDate = createEvent<Date>();
 export const setToDate = createEvent<Date>();

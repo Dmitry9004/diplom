@@ -25,6 +25,7 @@ import {
     uploadPage
 } from "./model.ts";
 import {getLastReviews} from "./effects.ts";
+import {authCheck, logoutUser } from "../auth/model.ts";
 
 const SimpleHeaderHref = ({text, href} : {text: string, href: string }) => {
     return (
@@ -35,21 +36,20 @@ const SimpleHeaderHref = ({text, href} : {text: string, href: string }) => {
 }
 
 const Header = () => {
-    const hrefs = [
-        ["Дашборд", ""],
-        ["Личный кабинет", ""],
-        ["Управление брендами", "/brands"],
-        ["Выйти", ""],
-    ];
+    const logout = useUnit(logoutUser)
 
     return (
         <Box background={'white'} display={"flex"} flexDir={'row'} paddingY={'10px'} border={'1px solid silver'}>
             <Text marginLeft={'25px'} fontWeight={'bold'} fontSize={'24px'}>Мониторинг репутации</Text>
 
             <Flex gap="25px" marginRight={"25px"} direction={'row'} marginLeft={'auto'}  justifyContent={'space-between'} alignItems={'center'}>
-                {hrefs.map(href => (
-                    <SimpleHeaderHref text={href[0]} href={href[1]} />
-                ))}
+                {/*{hrefs.map(href => (*/}
+                {/*    <SimpleHeaderHref text={href[0]} href={href[1]} />*/}
+                {/*))}*/}
+
+                <Box onClick={()=>logout()}>
+                    <SimpleHeaderHref text={"Выйти"} href={"/login"} />
+                </Box>
             </Flex>
         </Box>
     )
@@ -227,8 +227,10 @@ export const LastReviews = () => {
 
 export const HomePage = () => {
     const update = useUnit(uploadPage);
+    const checkAuth = useUnit(authCheck)
 
     update();
+    checkAuth();
     return (
         <Stack background={'#f0f0f0'} height={'100vh'}>
             <Header/>

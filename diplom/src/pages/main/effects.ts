@@ -13,17 +13,17 @@ const authRequest = async (url:any) => {
 }
 
 export const getSentimentsAllFx = createEffect(async () => {
-    const url = "http://127.0.0.1:80/metrics/result/analysis/1";
+    const url = "http://103.112.71.189:81/metrics/result/analysis/1";
     return await authRequest(url).then(res => res.json())
 });
 
 export const getAverageSentimentsAllFx = createEffect(async () => {
-    const url = "http://127.0.0.1:80/metrics/result/average";
+    const url = "http://103.112.71.189:81/metrics/result/average";
     return await authRequest(url).then(res => res.json());
 });
 
 export const getPDFFx = createEffect(async({from, to}:{from: string, to: string}) => {
-    const url = "http://127.0.0.1:80/reports/pdf/between?from"+ from + "&to=" + to;
+    const url = "http://103.112.71.189:81/reports/pdf/between?from"+ from + "&to=" + to;
 
     const a = document.createElement("a");
     a.href = url;
@@ -33,7 +33,7 @@ export const getPDFFx = createEffect(async({from, to}:{from: string, to: string}
     document.body.removeChild(a);
 });
 export const getExcelFx = createEffect(async({from, to}:{from: string, to: string}) => {
-    const url = "http://127.0.0.1:80/reports/excel/between?from"+ from + "&to=" + to;
+    const url = "http://103.112.71.189:81/reports/excel/between?from"+ from + "&to=" + to;
 
     const a = document.createElement("a");
     a.href = url;
@@ -48,7 +48,7 @@ export const redirectFx = createEffect(async(page: string) => {
 })
 
 export const registerUserFx = createEffect(async({login, pass}: {login: string, pass: string}) => {
-    const url = "http://127.0.0.1:80/users/register";
+    const url = "http://103.112.71.189:81/users/register";
 
 
     const response = await fetch(url, {
@@ -65,7 +65,7 @@ export const registerUserFx = createEffect(async({login, pass}: {login: string, 
     return response.json()
 });
 export const loginUserFx = createEffect(async({login, pass}:{login: string, pass: string}) => {
-    const url = "http://127.0.0.1:80/users/login";
+    const url = "http://103.112.71.189:81/users/login";
 
     const response = await fetch(url, {
         method: "POST",
@@ -97,24 +97,24 @@ export const updateBrandFx = createEffect(async(brand:Brand) => {
     })
         .then(res => res.json());
 
-    const url2 = "http://127.0.0.1:80/analysis/1?from="+brand.name;
+    const url2 = "http://103.112.71.189:81/analysis/1?from="+brand.name;
     await authRequest(url2);
 
     return response;
 });
 
 export const getTopWords = createEffect(async(brand:Brand) => {
-    const url = "http://127.0.0.1:8083/words?brand="+brand.name+"&limit=10";
+    const url = "http://103.112.71.189:8083/words?brand="+brand.name+"&limit=10";
     return await authRequest(url).then(res => res.json());
 })
 
 export const getBrands = createEffect(async() => {
-    const url = "http://127.0.0.1:8083/brands";
+    const url = "http://103.112.71.189:8083/brands";
     return await authRequest(url).then(res => res.json());
 })
 
 export const getLastReviews = createEffect(async(brand:Brand) => {
-    const url = "http://127.0.0.1:8083/reviews?brand="+brand.name+"&limit=50";
+    const url = "http://103.112.71.189:8083/reviews?brand="+brand.name+"&limit=50";
     return await authRequest(url).then(res => res.json());
 })
 

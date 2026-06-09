@@ -13,17 +13,17 @@ const authRequest = async (url:any) => {
 }
 
 export const getSentimentsAllFx = createEffect(async (brand:Brand) => {
-    const url = "http://127.0.0.1:81/metrics/result/analysis/"+brand.id+"/1";
+    const url = "http://103.112.71.189:82/metrics/result/analysis/"+brand.id+"/1";
     return await authRequest(url).then(res => res.json())
 });
 
 export const getAverageSentimentsAllFx = createEffect(async (brand:Brand) => {
-    const url = "http://127.0.0.1:81/metrics/result/average/"+brand.id;
+    const url = "http://103.112.71.189:82/metrics/result/average/"+brand.id;
     return await authRequest(url).then(res => res.json());
 });
 
 export const getPDFFx = createEffect(async({from, to, brand}:{from: string, to: string, brand: Brand}) => {
-    const url = "http://127.0.0.1:81/reports/pdf/"+brand.id+"/between/?from"+ from + "&to=" + to;
+    const url = "http://103.112.71.189:82/reports/pdf/"+brand.id+"/between/?from"+ from + "&to=" + to;
 
     const a = document.createElement("a");
     a.href = url;
@@ -33,7 +33,7 @@ export const getPDFFx = createEffect(async({from, to, brand}:{from: string, to: 
     document.body.removeChild(a);
 });
 export const getExcelFx = createEffect(async({from, to, brand}:{from: string, to: string, brand: Brand}) => {
-    const url = "http://127.0.0.1:82/reports/excel/"+brand.id+"between?from"+ from + "&to=" + to;
+    const url = "http://103.112.71.189:82/reports/excel/"+brand.id+"between?from"+ from + "&to=" + to;
 
     const a = document.createElement("a");
     a.href = url;

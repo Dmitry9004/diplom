@@ -6,6 +6,7 @@ import { useState } from "react";
 import {useNavigate} from "react-router";
 
 export const RegisterPage = () => {
+    document.title = "Регистрация";
     const registerHandler = useUnit(register)
     const errHandle = useUnit(registerUserError);
 

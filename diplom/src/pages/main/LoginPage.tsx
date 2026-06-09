@@ -6,6 +6,7 @@ import { useState } from "react";
 import {useNavigate, useNavigation} from "react-router";
 
 export const LoginPage = () => {
+    document.title = "Войти";
     const loginHandler = useUnit(loginUser)
     const errHandle = useUnit(loginUserError)
 

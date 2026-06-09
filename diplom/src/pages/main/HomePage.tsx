@@ -211,7 +211,7 @@ export const LastReviews = () => {
                 <Table variant={"simple"}>
                     <Thead>
                         <Tr>
-                            <Th>Загололвок</Th>
+                            <Th>Заголовок</Th>
                             <Th>Текст</Th>
                             <Th>Рейтинг</Th>
                             <Th>Дата</Th>
@@ -234,6 +234,7 @@ export const LastReviews = () => {
 }
 
 export const HomePage = () => {
+    document.title = "Главная";
     const update = useUnit(uploadPage);
     const checkAuth = useUnit(authCheck)
 

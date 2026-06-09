@@ -23,7 +23,7 @@ export const getAverageSentimentsAllFx = createEffect(async (brand:Brand) => {
 });
 
 export const getPDFFx = createEffect(async({from, to, brand}:{from: string, to: string, brand: Brand}) => {
-    const url = "http://103.112.71.189:82/reports/pdf/"+brand.id+"/between/?from"+ from + "&to=" + to;
+    const url = "http://103.112.71.189:82/reports/pdf/"+brand.id+"/between?from"+ from + "&to=" + to;
 
     const a = document.createElement("a");
     a.href = url;
@@ -33,7 +33,7 @@ export const getPDFFx = createEffect(async({from, to, brand}:{from: string, to: 
     document.body.removeChild(a);
 });
 export const getExcelFx = createEffect(async({from, to, brand}:{from: string, to: string, brand: Brand}) => {
-    const url = "http://103.112.71.189:82/reports/excel/"+brand.id+"between?from"+ from + "&to=" + to;
+    const url = "http://103.112.71.189:82/reports/excel/"+brand.id+"/between?from"+ from + "&to=" + to;
 
     const a = document.createElement("a");
     a.href = url;

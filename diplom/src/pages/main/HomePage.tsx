@@ -134,7 +134,7 @@ const Functions = () => {
 const BlockSentiment = ({value}:{value: string}) => {
     return (
         <Flex background={'white'} justifyContent={'center'}>
-            <Text color={"green"} align={'center'} fontWeight={'bold'} fontSize={'20px'}>{value}%</Text>
+            <Text color={"green"} align={'center'} fontWeight={'bold'} fontSize={'20px'}>{value}</Text>
         </Flex>
     );
 }
@@ -153,7 +153,7 @@ const SentimentBody = () => {
             <Flex flexDir={'column'} p={"10px"} gap={"10px"} background={'white'}  borderRadius={'10px'} width={'20%'}>
                 <Text align={'center'} >{"Общий рейтинг"}</Text>
                 <Skeleton height={"50px"} width={"50px"} isLoaded={!averagePending} margin={"auto"}>
-                    <BlockSentiment value={items?.average?.toPrecision(2)} />
+                    <BlockSentiment value={items?.average?.toPrecision(2)+"%"} />
                 </Skeleton>
             </Flex>
 

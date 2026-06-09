@@ -37,9 +37,8 @@ export const $sentimentAndAverage = combine({
 
 sample({
     clock: uploadPage,
-    target: [getAverageSentimentsAllFx, getSentimentsAllFx, getBrands],
+    target: getBrands,
 })
-
 
 export const setFromDate = createEvent<Date>();
 export const setToDate = createEvent<Date>();
@@ -53,32 +52,38 @@ $toDate.on(setToDate, (_, date) => date);
 export const getPdf = createEvent();
 export const getExcel = createEvent();
 
+
+const $targetBrand = createStore<Brand | null>(null)
+
 sample({
     clock: getExcel,
     source: {
         from: $fromDate,
         to: $toDate,
+        brand: $targetBrand,
     },
-    fn: ({from, to}) => {
+    fn: ({from, to, brand}) => {
         return ({
             from: Math.floor(from?.getTime() ?? 0 / 1000)+'',
             to: Math.floor(to?.getTime() ?? 0 / 1000)+'',
+            brand:brand!
         })
     },
     target: getExcelFx,
 })
-
 
 sample({
     clock: getPdf,
     source: {
         from: $fromDate,
         to: $toDate,
+        brand: $targetBrand,
     },
-    fn: ({from, to}) => {
+    fn: ({from, to, brand}) => {
         return ({
             from: Math.floor(from?.getTime() ?? 0 / 1000)+"",
             to: Math.floor(to?.getTime() ?? 0 / 1000)+"",
+            brand:brand!,
         })
     },
     target: getPDFFx,
@@ -99,7 +104,16 @@ $brands.on(getBrands.doneData, (_, data)=> {
 })
 export const setBrand = createEvent<Brand>();
 
-const $targetBrand = createStore<Brand | null>(null)
+sample({
+    clock: setBrand,
+    target: getSentimentsAllFx,
+})
+
+sample({
+    clock: setBrand,
+    target: getAverageSentimentsAllFx,
+})
+
 $targetBrand.on(setBrand, (_, data) => {
     return data;
 })
@@ -119,6 +133,11 @@ sample({
     filter: (val) => !val,
     fn: (_, val) => val[0],
     target: setBrand,
+})
+
+sample({
+    clock: $targetBrand,
+    target: [],
 })
 
 

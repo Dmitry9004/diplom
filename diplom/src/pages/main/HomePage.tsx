@@ -19,7 +19,7 @@ import {
     $averagePending, $brands, $lastReviews, $pendingReviews, $pendingWords,
     $sentimentAndAverage,
     $sentimentPending, $topWords,
-    getExcel, getPdf,
+    getExcel, getPdf, setBrand,
     setFromDate,
     setToDate, updateBrand,
     uploadPage
@@ -81,8 +81,13 @@ const UpdateBrand = () => {
 
 const Functions = () => {
     const brands = useUnit($brands);
+    const set = useUnit(setBrand);
     const setFrom = useUnit(setFromDate)
     const setTo = useUnit(setToDate)
+
+    const setTargetBrand = (brand: string) => {
+        set(brands.find(i => i.name === brand)!)
+    }
 
     const parseFrom = ({str}:{str: string}) => {
         const arr = str.split('.')
@@ -92,7 +97,10 @@ const Functions = () => {
         <Flex dir={'row'} background={'white'} marginX={"30px"} borderRadius={'10px'} paddingX={'10px'}>
             <Box p={'10px'}>
                 <Text fontSize={'14px'}>Бренд</Text>
-                <Select>
+                <Select onClick={(e) => {
+                    // @ts-ignore
+                    setTargetBrand(e.target.value)}
+                }>
                     {brands.map(brand => (
                         <option value={brand.name}>{brand.name}</option>
                     ))}

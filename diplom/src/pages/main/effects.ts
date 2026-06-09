@@ -97,7 +97,7 @@ export const updateBrandFx = createEffect(async(brand:Brand) => {
     })
         .then(res => res.json());
 
-    const url2 = "http://103.112.71.189:82/analysis/1?from="+brand.name;
+    const url2 = "http://103.112.71.189:82/analysis/"+brand.id+"?from="+brand.name;
     await authRequest(url2);
 
     return response;
